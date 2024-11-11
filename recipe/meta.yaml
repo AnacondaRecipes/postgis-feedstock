@@ -9,7 +9,7 @@ source:
   sha256: 1e9cc4c4f390e4c3be4f5c125a72f39dfa847412332952429952cbd731ac9ba3
 
 build:
-  number: 4
+  number: 5
   skip: true  # [win]
 
 requirements:
@@ -31,8 +31,8 @@ requirements:
     - pcre
     - proj
     - json-c
-    - postgresql
-    - libpq
+    - postgresql 17.0
+    - libpq 17.0
   run:
     - libgdal
     - geos
@@ -40,8 +40,8 @@ requirements:
     - pcre
     - proj
     - json-c
-    - postgresql
-    - libpq
+    - {{ pin_compatible('postgresql', max_pin='x.x.x') }}
+    - {{ pin_compatible('libpq', max_pin='x.x.x') }}
 
 test:
   files:
