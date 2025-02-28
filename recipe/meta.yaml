@@ -33,6 +33,10 @@ requirements:
     - json-c
     - postgresql
     - libpq
+    #DDD
+    - pcre2
+    - libiconv
+    - libxml2
   run:
     - libgdal
     - geos
