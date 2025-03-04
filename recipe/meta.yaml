@@ -12,6 +12,7 @@ source:
 build:
   number: 0
   skip: True  # [s390x]  # missing libgdal
+  skip: True  # [win]  # no autoconf, cmake etc etc
 
 requirements:
   build:
@@ -34,7 +35,6 @@ requirements:
     - json-c
     - postgresql
     - libpq
-    #DDD
     - pcre2
     - libiconv
     - libxml2
@@ -58,10 +58,13 @@ requirements:
       - test -f $PREFIX/bin/raster2pgsql   # [linux or osx]
       - test -f $PREFIX/bin/shp2pgsql   # [linux or osx]
 
-      - test -f $PREFIX/lib/postgis-3.dylib  # [osx]
-      - test -f $PREFIX/lib/postgis_topology-3.dylib  # [osx]
-      - test -f $PREFIX/lib/postgis_raster-3.dylib  # [osx]
-      - test -f $PREFIX/lib/address_standardizer-3.dylib  # [osx]
+      {% set LIBEXT = "dylib" %}  # [osx]
+      {% set LIBEXT = "so" %}  # [linux]
+
+      - test -f $PREFIX/lib/postgis-3.{{ LIBEXT }}
+      - test -f $PREFIX/lib/postgis_topology-3.{{ LIBEXT }}
+      - test -f $PREFIX/lib/postgis_raster-3.{{ LIBEXT }}
+      - test -f $PREFIX/lib/address_standardizer-3.{{ LIBEXT }}
 
 # test:
 #   files:
