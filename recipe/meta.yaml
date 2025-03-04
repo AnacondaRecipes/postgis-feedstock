@@ -11,6 +11,7 @@ source:
 
 build:
   number: 0
+  skip: True  # [s390x]  # missing libgdal
 
 requirements:
   build:
@@ -47,15 +48,30 @@ requirements:
     - postgresql
     - libpq
 
-test:
-  files:
-    - test_data
-    - run_test.sh
-  commands:
-    - sh run_test.sh
-    # - shp2pgsql test_data/test.shp
-    # - pgsql2shp
-    # - raster2pgsql
+  test:
+    commands:
+      - test -f $PREFIX/bin/pgsql2shp   # [linux or osx]
+      - test -f $PREFIX/bin/pgtopo_export   # [linux or osx]
+      - test -f $PREFIX/bin/pgtopo_import   # [linux or osx]
+      - test -f $PREFIX/bin/postgis   # [linux or osx]
+      - test -f $PREFIX/bin/postgis_restore   # [linux or osx]
+      - test -f $PREFIX/bin/raster2pgsql   # [linux or osx]
+      - test -f $PREFIX/bin/shp2pgsql   # [linux or osx]
+
+      - test -f $PREFIX/lib/postgis-3.dylib  # [osx]
+      - test -f $PREFIX/lib/postgis_topology-3.dylib  # [osx]
+      - test -f $PREFIX/lib/postgis_raster-3.dylib  # [osx]
+      - test -f $PREFIX/lib/address_standardizer-3.dylib  # [osx]
+
+# test:
+#   files:
+#     - test_data
+#     - run_test.sh
+#   commands:
+#     - sh run_test.sh
+#     # - shp2pgsql test_data/test.shp
+#     # - pgsql2shp
+#     # - raster2pgsql
 
 about:
   home: http://postgis.net
