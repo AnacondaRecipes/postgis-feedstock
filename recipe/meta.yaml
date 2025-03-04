@@ -48,36 +48,26 @@ requirements:
     - postgresql
     - libpq
 
-  test:
-    commands:
-      - test -f $PREFIX/bin/pgsql2shp   # [linux or osx]
-      - test -f $PREFIX/bin/pgtopo_export   # [linux or osx]
-      - test -f $PREFIX/bin/pgtopo_import   # [linux or osx]
-      - test -f $PREFIX/bin/postgis   # [linux or osx]
-      - test -f $PREFIX/bin/postgis_restore   # [linux or osx]
-      - test -f $PREFIX/bin/raster2pgsql   # [linux or osx]
-      - test -f $PREFIX/bin/shp2pgsql   # [linux or osx]
+test:
+  commands:
+    - test -f $PREFIX/bin/pgsql2shp   # [linux or osx]
+    - test -f $PREFIX/bin/pgtopo_export   # [linux or osx]
+    - test -f $PREFIX/bin/pgtopo_import   # [linux or osx]
+    - test -f $PREFIX/bin/postgis   # [linux or osx]
+    - test -f $PREFIX/bin/postgis_restore   # [linux or osx]
+    - test -f $PREFIX/bin/raster2pgsql   # [linux or osx]
+    - test -f $PREFIX/bin/shp2pgsql   # [linux or osx]
 
-      {% set LIBEXT = "dylib" %}  # [osx]
-      {% set LIBEXT = "so" %}  # [linux]
+    {% set LIBEXT = "dylib" %}  # [osx]
+    {% set LIBEXT = "so" %}  # [linux]
 
-      - test -f $PREFIX/lib/postgis-3.{{ LIBEXT }}
-      - test -f $PREFIX/lib/postgis_topology-3.{{ LIBEXT }}
-      - test -f $PREFIX/lib/postgis_raster-3.{{ LIBEXT }}
-      - test -f $PREFIX/lib/address_standardizer-3.{{ LIBEXT }}
-
-# test:
-#   files:
-#     - test_data
-#     - run_test.sh
-#   commands:
-#     - sh run_test.sh
-#     # - shp2pgsql test_data/test.shp
-#     # - pgsql2shp
-#     # - raster2pgsql
+    - test -f $PREFIX/lib/postgis-3.{{ LIBEXT }}
+    - test -f $PREFIX/lib/postgis_topology-3.{{ LIBEXT }}
+    - test -f $PREFIX/lib/postgis_raster-3.{{ LIBEXT }}
+    - test -f $PREFIX/lib/address_standardizer-3.{{ LIBEXT }}
 
 about:
-  home: http://postgis.net
+  home: https://postgis.net
   license: GPL-2.0-or-later
   license_family: GPL
   license_file: LICENSE.TXT
@@ -86,7 +76,7 @@ about:
     PostGIS is a spatial database extender for PostgreSQL object-relational
     database. It adds support for geographic objects allowing location
     queries to be run in SQL.
-  doc_url: http://postgis.net/documentation/
+  doc_url: https://postgis.net/documentation/
   dev_url: https://git.osgeo.org/gitea/postgis/postgis
 
 extra:
@@ -95,3 +85,5 @@ extra:
     - dwnoble
     - xylar
     - mxr-conda
+  skip-lints:
+    - host_section_needs_exact_pinnings
